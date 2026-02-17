@@ -35,9 +35,9 @@ export function LoanCard({
   isRejecting,
   onRejectStart,
 }: LoanCardProps) {
-  const [timeLeft, setTimeLeft] = useState(
-    loan.expiresAt.getTime() - Date.now()
-  );
+  const [timeLeft, setTimeLeft] = useState(() => {
+    return loan.expiresAt.getTime() - Date.now();
+  });
   const [modalOpen, setModalOpen] = useState(false);
   const reject = useAgentStore((s) => s.reject);
   const expireRequest = useAgentStore((s) => s.expireRequest);

@@ -19,8 +19,13 @@ const EMERGENCY_CONTACTS = [
 
 export function WalletHeader() {
   const wallet = useAgentStore((s) => s.wallet);
-  const prevValues = useRef(wallet);
+  const [prevWallet, setPrevWallet] = useState(wallet);
   const [emergencyOpen, setEmergencyOpen] = useState(false);
+
+  // Update previous wallet values after render
+  useEffect(() => {
+    setPrevWallet(wallet);
+  }, [wallet]);
 
   return (
     <header className="relative flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 bg-zinc-950/80 px-6 py-4 pr-44 sm:pr-52">
@@ -64,24 +69,24 @@ export function WalletHeader() {
         <StatCard
           label="Cash Deployed"
           value={wallet.cashDeployed}
-          prevValue={prevValues.current.cashDeployed}
+          prevValue={prevWallet.cashDeployed}
           prefix="$"
         />
         <StatCard
           label="Fees This Month"
           value={wallet.feesEarned}
-          prevValue={prevValues.current.feesEarned}
+          prevValue={prevWallet.feesEarned}
           prefix="$"
         />
         <StatCard
           label="Active Loans"
           value={wallet.activeCount}
-          prevValue={prevValues.current.activeCount}
+          prevValue={prevWallet.activeCount}
         />
         <StatCard
           label="Repayment Rate"
           value={wallet.repaymentRate}
-          prevValue={prevValues.current.repaymentRate}
+          prevValue={prevWallet.repaymentRate}
           suffix="%"
         />
       </div>
@@ -135,10 +140,13 @@ function StatCard({
 
   useEffect(() => {
     if (value !== prevRef.current) {
-      setIsFlashing(true);
       prevRef.current = value;
-      const t = setTimeout(() => setIsFlashing(false), 400);
-      return () => clearTimeout(t);
+      // Schedule state update in next tick to avoid synchronous setState in effect
+      const timeoutId = setTimeout(() => {
+        setIsFlashing(true);
+        setTimeout(() => setIsFlashing(false), 400);
+      }, 0);
+      return () => clearTimeout(timeoutId);
     }
   }, [value]);
 

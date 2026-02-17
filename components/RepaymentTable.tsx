@@ -4,6 +4,7 @@ import { useAgentStore } from "@/lib/store";
 import type { ActiveLoan } from "@/lib/seed-data";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export function getRepaymentStatus(nextDue: Date): ActiveLoan["status"] {
   const daysUntilDue = Math.ceil(
@@ -31,6 +32,8 @@ const STATUS_CONFIG = {
 
 export function RepaymentTable() {
   const activeLoans = useAgentStore((s) => s.activeLoans);
+  // Calculate one minute ago timestamp once on mount
+  const [oneMinuteAgo] = useState(() => Date.now() - 60000);
 
   return (
     <div className="overflow-hidden rounded-lg border border-zinc-800">
@@ -63,7 +66,7 @@ export function RepaymentTable() {
               <RepaymentRow
                 key={loan.id}
                 loan={loan}
-                isNew={index === 0 && loan.disbursedAt > new Date(Date.now() - 60000)}
+                isNew={index === 0 && loan.disbursedAt.getTime() > oneMinuteAgo}
               />
             ))}
           </tbody>

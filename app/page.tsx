@@ -12,11 +12,22 @@ import { getRepaymentStatus } from "@/components/RepaymentTable";
 import { Clock, Trophy } from "lucide-react";
 
 export default function DashboardPage() {
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:DashboardPage',message:'DashboardPage render start',data:{timestamp:Date.now()},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
+  }, []);
+  // #endregion
   const loanQueue = useAgentStore((s) => s.loanQueue);
   const injectRandomLoan = useAgentStore((s) => s.injectRandomLoan);
   const activeLoans = useAgentStore((s) => s.activeLoans);
   const [rejectingId, setRejectingId] = useState<string>("");
   const [newLoanIds, setNewLoanIds] = useState<Set<string>>(new Set());
+  
+  // #region agent log
+  useEffect(() => {
+    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:useAgentStore',message:'store values loaded',data:{loanQueueLen:loanQueue.length,activeLoansLen:activeLoans.length},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
+  }, [loanQueue.length, activeLoans.length]);
+  // #endregion
 
   // Auto-inject new loan every 20 seconds (only when queue has fewer than 3)
   useEffect(() => {
