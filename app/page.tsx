@@ -14,7 +14,7 @@ import { Clock, Trophy } from "lucide-react";
 export default function DashboardPage() {
   // #region agent log
   useEffect(() => {
-    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:DashboardPage',message:'DashboardPage render start',data:{timestamp:Date.now()},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
+    fetch('http://127.0.0.1:7243/ingest/c4acd6e7-1082-4d91-b710-9236f5bae6ec',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:DashboardPage',message:'DashboardPage render start',data:{timestamp:Date.now(),pathname:window.location.pathname,hostname:window.location.hostname},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
   }, []);
   // #endregion
   const loanQueue = useAgentStore((s) => s.loanQueue);
@@ -25,7 +25,7 @@ export default function DashboardPage() {
   
   // #region agent log
   useEffect(() => {
-    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:useAgentStore',message:'store values loaded',data:{loanQueueLen:loanQueue.length,activeLoansLen:activeLoans.length},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
+    fetch('http://127.0.0.1:7243/ingest/c4acd6e7-1082-4d91-b710-9236f5bae6ec',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'page.tsx:useAgentStore',message:'store values loaded',data:{loanQueueLen:loanQueue.length,activeLoansLen:activeLoans.length},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
   }, [loanQueue.length, activeLoans.length]);
   // #endregion
 

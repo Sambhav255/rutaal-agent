@@ -26,6 +26,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // #region agent log
+  if (typeof window !== 'undefined') {
+    fetch('http://127.0.0.1:7243/ingest/c4acd6e7-1082-4d91-b710-9236f5bae6ec',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'layout.tsx:RootLayout',message:'RootLayout render',data:{isClient:true,pathname:window.location.pathname},timestamp:Date.now(),hypothesisId:'H1'})}).catch(()=>{});
+  }
+  // #endregion
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
