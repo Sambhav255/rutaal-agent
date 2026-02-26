@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#f5f3ed",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+        className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans antialiased min-h-screen overscroll-behavior-none`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}

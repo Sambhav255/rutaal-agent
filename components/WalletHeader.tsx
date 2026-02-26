@@ -32,12 +32,12 @@ export function WalletHeader() {
   }, [wallet]);
 
   return (
-    <header className="border-b border-rutaal-navy/10 bg-white">
+    <header className="border-b border-rutaal-navy/10 bg-white sticky top-0 z-20">
       {/* Top row: logo (back) + title */}
-      <div className="relative flex items-center justify-between px-6 py-3">
+      <div className="relative flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3 gap-2">
         <Link
           href="/"
-          className="flex items-center transition-opacity hover:opacity-80"
+          className="flex items-center transition-opacity hover:opacity-80 shrink-0 min-h-[44px] min-w-[44px] items-center"
           title="Back to landing page"
         >
           <Image
@@ -45,25 +45,26 @@ export function WalletHeader() {
             alt="Ruta'al - Back to landing page"
             width={180}
             height={65}
-            className="h-12 w-auto sm:h-14"
+            className="h-10 w-auto sm:h-14"
           />
         </Link>
-        <h2 className="absolute left-1/2 -translate-x-1/2 text-sm font-semibold uppercase tracking-wider text-[#323030]/80">
+        <h2 className="absolute left-1/2 -translate-x-1/2 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#323030]/80 truncate max-w-[40%]">
           Agent Dashboard
         </h2>
         <Button
           variant="outline"
           size="sm"
           onClick={() => setInventoryOffsetOpen(true)}
-          className="h-8 gap-1.5 border-rutaal-navy/20 bg-white px-3 text-xs hover:bg-[#f5f3ed] hover:border-rutaal-navy/40"
+          className="h-8 sm:h-8 gap-1 border-rutaal-navy/20 bg-white px-2 sm:px-3 text-[10px] sm:text-xs hover:bg-[#f5f3ed] hover:border-rutaal-navy/40 shrink-0 min-h-[44px]"
         >
-          <Package className="size-3.5" />
-          Inventory Payable Offset
+          <Package className="size-3 sm:size-3.5 shrink-0" />
+          <span className="hidden sm:inline">Inventory Payable Offset</span>
+          <span className="sm:hidden">Offset</span>
         </Button>
       </div>
 
       {/* Main row: identity + stats */}
-      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-between gap-3 sm:gap-4 px-3 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-base font-semibold text-[#323030]">Juan&apos;s Pharmacy</h1>
@@ -90,7 +91,7 @@ export function WalletHeader() {
           </Button>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-2 sm:gap-4">
         <StatCard
           label="Cash Deployed"
           value={wallet.cashDeployed}
@@ -179,12 +180,12 @@ function StatCard({
   }, [value]);
 
   return (
-    <div className="min-w-[90px] rounded-md border border-rutaal-navy/10 bg-[#f5f3ed]/60 px-3 py-1.5">
-      <div className="text-[10px] font-medium uppercase tracking-wider text-[#323030]/50">
+    <div className="min-w-[70px] sm:min-w-[90px] rounded-md border border-rutaal-navy/10 bg-[#f5f3ed]/60 px-2 sm:px-3 py-1.5">
+      <div className="text-[9px] sm:text-[10px] font-medium uppercase tracking-wider text-[#323030]/50">
         {label}
       </div>
       <div
-        className={`font-mono text-lg font-semibold tabular-nums transition-all ${
+        className={`font-mono text-base sm:text-lg font-semibold tabular-nums transition-all ${
           isFlashing ? "animate-stat-flash text-rutaal-yellow" : "text-[#323030]"
         }`}
       >

@@ -108,13 +108,13 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f5f3ed] text-[#323030]">
+    <div className="min-h-screen bg-[#f5f3ed] text-[#323030] safe-area-padding">
       <div className="flex min-h-screen flex-col">
         {/* Row 1: Agent Header */}
         <WalletHeader />
 
         {/* Row 2: Loan Queue + Repayment Tracker (left) | Sidebar (right) */}
-        <div className="flex flex-1 flex-col gap-4 p-4 lg:flex-row">
+        <div className="flex flex-1 flex-col gap-4 p-3 sm:p-4 lg:flex-row">
           <div className="flex-[3] min-w-0 space-y-4 lg:flex-[6]">
             <section>
               <div className="mb-2 flex items-baseline justify-between">
@@ -161,19 +161,19 @@ export default function DashboardPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => setUserOnboardingOpen(true)}
-                className="flex-1 gap-1.5 border-rutaal-navy/20 bg-white text-xs hover:bg-[#f5f3ed]"
+                className="flex-1 gap-1 sm:gap-1.5 border-rutaal-navy/20 bg-white text-[11px] sm:text-xs hover:bg-[#f5f3ed] min-h-[44px]"
               >
-                <UserPlus className="size-3.5" />
-                User Onboarding
+                <UserPlus className="size-3 sm:size-3.5 shrink-0" />
+                <span className="truncate">User Onboarding</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setRutaalManagementOpen(true)}
-                className="flex-1 gap-1.5 border-rutaal-navy/20 bg-white text-xs hover:bg-[#f5f3ed]"
+                className="flex-1 gap-1 sm:gap-1.5 border-rutaal-navy/20 bg-white text-[11px] sm:text-xs hover:bg-[#f5f3ed] min-h-[44px]"
               >
-                <Headphones className="size-3.5" />
-                Rutaal Management
+                <Headphones className="size-3 sm:size-3.5 shrink-0" />
+                <span className="truncate">Rutaal Mgmt</span>
               </Button>
             </div>
             <div className="rounded-lg border border-rutaal-navy/10 bg-white p-4">

@@ -306,11 +306,11 @@ export function UssdPhone() {
   }, [scene === "loading"]);
 
   return (
-    <div className="flex items-center justify-center py-8">
+    <div className="flex items-center justify-center py-4 sm:py-8 w-full px-2">
       <div
-        className="relative w-[400px] sm:w-[440px] rounded-[2.75rem] p-5 flex flex-col shadow-2xl"
+        className="relative w-full max-w-[min(400px,calc(100vw-24px))] sm:w-[440px] sm:max-w-[440px] rounded-[2rem] sm:rounded-[2.75rem] p-3 sm:p-5 flex flex-col shadow-2xl"
         style={{
-          height: "min(90vh, 760px)",
+          height: "min(85vh, 760px)",
           background:
             "linear-gradient(180deg, #4b5563 0%, #374151 15%, #1f2937 60%, #111827 100%)",
           boxShadow:
@@ -324,7 +324,7 @@ export function UssdPhone() {
 
         <div className="relative w-full flex-[1.4] min-h-0 rounded-t-xl rounded-b-[1.75rem] p-2 border-2 border-black/80 shadow-inner bg-black/90 mt-1">
           <div
-            className="relative flex h-full min-h-[400px] flex-col overflow-hidden rounded-t-lg rounded-b-[1.5rem]"
+            className="relative flex h-full min-h-[280px] sm:min-h-[400px] flex-col overflow-hidden rounded-t-lg rounded-b-[1.5rem]"
             style={{
               backgroundColor: "#ffffff",
               backgroundImage:

@@ -37,7 +37,7 @@ export function RepaymentTable() {
 
   return (
     <div className="overflow-hidden rounded-lg border border-rutaal-navy/10 bg-white">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-x-scroll-touch">
         <table className="w-full min-w-[700px] border-collapse">
           <thead>
             <tr className="border-b border-rutaal-navy/10 bg-[#faf9f7]">
