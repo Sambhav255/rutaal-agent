@@ -31,7 +31,7 @@ const CONTACT_OPTIONS = [
   {
     icon: Headphones,
     label: "Agent Helpline",
-    value: "1-800-RUTAAL",
+    value: "1-800-RUTA'AL",
     href: "tel:1800788225",
   },
 ];

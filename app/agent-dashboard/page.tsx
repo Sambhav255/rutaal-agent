@@ -108,7 +108,7 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f5f3ed] text-[#323030] safe-area-padding">
+    <div id="main" className="min-h-screen bg-[#f5f3ed] text-[#323030] safe-area-padding">
       <div className="flex min-h-screen flex-col">
         {/* Row 1: Agent Header */}
         <WalletHeader />
@@ -130,7 +130,7 @@ export default function DashboardPage() {
                   <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-rutaal-navy/20 bg-white py-12 text-center px-4">
                     <p className="text-[#323030]/70">No pending requests</p>
                     <p className="mt-1 text-sm text-[#323030]/50">
-                      Open the User Experience in another tab, complete a loan flow, and it will appear here.
+                      Open the User Experience in a new tab or window, complete a loan flow via *777#, and it will appear here.
                     </p>
                   </div>
                 ) : (
@@ -173,7 +173,7 @@ export default function DashboardPage() {
                 className="flex-1 gap-1 sm:gap-1.5 border-rutaal-navy/20 bg-white text-[11px] sm:text-xs hover:bg-[#f5f3ed] min-h-[44px]"
               >
                 <Headphones className="size-3 sm:size-3.5 shrink-0" />
-                <span className="truncate">Rutaal Mgmt</span>
+                <span className="truncate">Ruta&apos;al Management</span>
               </Button>
             </div>
             <div className="rounded-lg border border-rutaal-navy/10 bg-white p-4">

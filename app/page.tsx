@@ -3,16 +3,21 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#f5f3ed] px-4 py-8 sm:px-6 sm:py-10 safe-area-padding">
+    <main id="main" className="flex min-h-screen flex-col items-center justify-center bg-[#f5f3ed] px-4 py-8 sm:px-6 sm:py-10 safe-area-padding">
       <div className="w-full max-w-3xl space-y-6 sm:space-y-8">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <Image
-            src="/RUTA_AL_Logo.png"
-            alt="Ruta'al"
-            width={240}
-            height={80}
-            className="h-20 w-auto sm:h-24"
-          />
+          <div className="relative">
+            <span className="absolute -top-2 -right-2 sm:top-0 sm:right-0 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-rutaal-yellow text-[#323030] rounded-md shadow-sm">
+              Demo
+            </span>
+            <Image
+              src="/RUTA_AL_Logo.png"
+              alt="Ruta'al"
+              width={240}
+              height={80}
+              className="h-20 w-auto sm:h-24"
+            />
+          </div>
           <p className="text-base text-[#323030]/90 sm:text-lg max-w-xl">
             <span className="font-semibold text-[#323030]">Banking Without Barriers.</span>{" "}
             Microfinance for feature phones—no smartphone required.

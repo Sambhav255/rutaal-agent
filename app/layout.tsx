@@ -16,12 +16,27 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: "Ruta'al – Banking Without Barriers | Demo",
   description: "Microfinance for feature phones. Try the USSD user experience and agent dashboard demo.",
   icons: {
     icon: "/RUTA_AL_Logo.png",
     apple: "/RUTA_AL_Logo.png",
+  },
+  openGraph: {
+    title: "Ruta'al – Banking Without Barriers | Demo",
+    description: "Microfinance for feature phones. Try the USSD user experience and agent dashboard demo.",
+    images: ["/RUTA_AL_Logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "Ruta'al – Banking Without Barriers | Demo",
+    description: "Microfinance for feature phones. Try the USSD user experience and agent dashboard demo.",
   },
 };
 
@@ -42,9 +57,15 @@ export default function RootLayout({
       <body
         className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans antialiased min-h-screen overscroll-behavior-none`}
       >
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-rutaal-green focus:text-white focus:rounded-md focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
-          <Toaster position="bottom-right" richColors />
+          <Toaster position="bottom-center" richColors />
         </ThemeProvider>
       </body>
     </html>

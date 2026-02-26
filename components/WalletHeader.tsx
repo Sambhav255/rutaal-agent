@@ -84,7 +84,7 @@ export function WalletHeader() {
             variant="destructive"
             size="sm"
             onClick={() => setEmergencyOpen(true)}
-            className="h-7 gap-1.5 px-2.5 text-xs bg-rutaal-red hover:bg-rutaal-red/90"
+            className="h-7 gap-1.5 px-2.5 text-xs bg-rutaal-red-deep hover:bg-rutaal-red-deep/90 text-white"
           >
             <ShieldAlert className="size-3.5" />
             Emergency

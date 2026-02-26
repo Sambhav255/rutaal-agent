@@ -5,6 +5,7 @@ import { UssdPhone } from "@/components/UssdPhone";
 export default function UserDashboardPage() {
   return (
     <main
+      id="main"
       className="flex min-h-screen flex-col items-center justify-center overflow-x-hidden overflow-y-auto bg-[#f5f3ed] px-3 py-6 sm:px-6 safe-area-padding"
     >
       <Link

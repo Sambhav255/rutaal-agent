@@ -134,9 +134,8 @@ export function LoanCard({
               </Button>
               <Button
                 size="sm"
-                variant="destructive"
                 onClick={handleReject}
-                className="h-7 gap-1 px-2.5 text-xs"
+                className="h-7 gap-1 px-2.5 text-xs bg-rutaal-red-deep hover:bg-rutaal-red-deep/90 text-white"
               >
                 <X className="size-3.5" />
                 Reject
