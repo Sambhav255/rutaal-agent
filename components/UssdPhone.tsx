@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ShieldCheck, Signal, Wifi, Battery, Phone, PhoneOff } from "lucide-react";
+import { ShieldCheck, Signal, WifiOff, Battery, Phone, PhoneOff } from "lucide-react";
 
 type Scene =
   | "locked"
@@ -339,7 +339,7 @@ export function UssdPhone() {
                   USSD
                 </span>
                 <Signal className="w-4 h-4 opacity-80" />
-                <Wifi className="w-4 h-4 opacity-80" />
+                <WifiOff className="w-4 h-4 opacity-80" />
               </div>
               <div className="flex items-center gap-2">
                 <Battery className="w-4 h-4" />
