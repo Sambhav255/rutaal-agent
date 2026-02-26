@@ -52,30 +52,12 @@ export const NEPAL_NAMES = [
 export const INITIAL_LOAN_QUEUE: LoanRequest[] = [
   {
     id: "req-1",
-    borrowerName: "Roberto Hernández",
-    phone: "+52 *** *** 4521",
-    amount: 150,
+    borrowerName: "Sambhav Lamichhane",
+    phone: "+977 *** *** 5543",
+    amount: 250,
     creditScore: 72,
     requestedAt: new Date(Date.now() - 5 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 15 * 60 * 1000),
-  },
-  {
-    id: "req-2",
-    borrowerName: "Sita Devi",
-    phone: "+977 *** *** 8903",
-    amount: 275,
-    creditScore: 88,
-    requestedAt: new Date(Date.now() - 2 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 18 * 60 * 1000),
-  },
-  {
-    id: "req-3",
-    borrowerName: "Miguel Martínez",
-    phone: "+52 *** *** 1123",
-    amount: 85,
-    creditScore: 52,
-    requestedAt: new Date(Date.now() - 1 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 19 * 60 * 1000),
+    expiresAt: new Date(Date.now() + 20 * 60 * 1000), // 20 min
   },
 ];
 
@@ -124,7 +106,7 @@ export const INITIAL_ACTIVE_LOANS: ActiveLoan[] = [
 
 export const INITIAL_WALLET = {
   cashDeployed: 1095,
-  feesEarned: 47,
+  feesEarned: 240, // Agent commissions (aligns with slide: ~$240/month at 50 customers)
   activeCount: 4,
   repaymentRate: 94.2,
 };

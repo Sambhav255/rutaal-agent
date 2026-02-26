@@ -36,27 +36,27 @@ export function RepaymentTable() {
   const [oneMinuteAgo] = useState(() => Date.now() - 60000);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-800">
+    <div className="overflow-hidden rounded-lg border border-rutaal-navy/10 bg-white">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[700px] border-collapse">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-900/80">
-              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            <tr className="border-b border-rutaal-navy/10 bg-[#faf9f7]">
+              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Borrower
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Amount
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Total Repayable
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Monthly Payment
               </th>
-              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Next Due
               </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#323030]/70">
                 Status
               </th>
             </tr>
@@ -83,27 +83,27 @@ function RepaymentRow({ loan, isNew }: { loan: ActiveLoan; isNew?: boolean }) {
   return (
     <tr
       className={cn(
-        "border-b border-zinc-800/80 transition-colors hover:bg-zinc-900/50",
+        "border-b border-rutaal-navy/10 transition-colors hover:bg-[#faf9f7]",
         isNew && "animate-fade-in bg-rutaal-green/5"
       )}
     >
-      <td className="px-4 py-3 font-medium text-white">{loan.borrowerName}</td>
-      <td className="px-4 py-3 text-right font-mono text-zinc-300">
+      <td className="px-4 py-3 font-medium text-[#323030]">{loan.borrowerName}</td>
+      <td className="px-4 py-3 text-right font-mono text-[#323030]/90">
         ${loan.amount}
       </td>
-      <td className="px-4 py-3 text-right font-mono text-zinc-300">
+      <td className="px-4 py-3 text-right font-mono text-[#323030]/90">
         ${loan.totalRepayable}
       </td>
-      <td className="px-4 py-3 text-right font-mono text-zinc-300">
+      <td className="px-4 py-3 text-right font-mono text-[#323030]/90">
         ${loan.monthlyPayment}
       </td>
-      <td className="px-4 py-3 text-right font-mono text-zinc-400">
+      <td className="px-4 py-3 text-right font-mono text-[#323030]/80">
         {format(loan.nextDue, "MMM d, yyyy")}
       </td>
       <td className="px-4 py-3">
         <span
           className={cn(
-            "inline-flex rounded-md border px-2 py-0.5 text-xs font-medium",
+            "inline-flex rounded px-2 py-0.5 text-xs font-medium",
             config.className
           )}
         >

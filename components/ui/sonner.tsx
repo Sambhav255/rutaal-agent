@@ -11,18 +11,7 @@ import { useTheme } from "next-themes"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  // #region agent log
-  let themeResult;
-  try {
-    themeResult = useTheme();
-    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'sonner.tsx:Toaster',message:'useTheme called',data:{theme:themeResult?.theme},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
-  } catch (e: unknown) {
-    const error = e instanceof Error ? e : new Error(String(e));
-    fetch('http://127.0.0.1:7242/ingest/8f84f473-30d1-46b4-8242-a409effc4f47',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'sonner.tsx:Toaster',message:'useTheme ERROR',data:{error:error.message,stack:error.stack?.substring(0,300)},timestamp:Date.now(),hypothesisId:'H2'})}).catch(()=>{});
-    throw error;
-  }
-  const { theme = "system" } = themeResult;
-  // #endregion
+  const { theme = "system" } = useTheme();
 
   return (
     <Sonner

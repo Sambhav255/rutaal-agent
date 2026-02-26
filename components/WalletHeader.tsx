@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { useAgentStore } from "@/lib/store";
 import { useEffect, useRef, useState } from "react";
-import { MapPin, ShieldAlert } from "lucide-react";
+import { MapPin, Package, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { InventoryPayableOffset } from "@/components/InventoryPayableOffset";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +24,7 @@ export function WalletHeader() {
   const wallet = useAgentStore((s) => s.wallet);
   const [prevWallet, setPrevWallet] = useState(wallet);
   const [emergencyOpen, setEmergencyOpen] = useState(false);
+  const [inventoryOffsetOpen, setInventoryOffsetOpen] = useState(false);
 
   // Update previous wallet values after render
   useEffect(() => {
@@ -28,44 +32,65 @@ export function WalletHeader() {
   }, [wallet]);
 
   return (
-    <header className="relative flex flex-wrap items-center justify-between gap-4 border-b border-zinc-800 bg-zinc-950/80 px-6 py-4 pr-44 sm:pr-52">
-      {/* Rutaal logo – top right, larger than agent name */}
-      <div className="absolute right-6 top-4 text-right">
-        <div className="font-mono text-2xl font-bold tracking-tight text-rutaal-green sm:text-3xl">
-          RUTAAL
-        </div>
-        <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 sm:text-xs">
-          Agent Dashboard
-        </div>
-      </div>
-
-      <div className="flex items-center gap-6">
-        <div>
-          <h1 className="text-lg font-semibold text-white">Don Roberto</h1>
-          <div className="flex items-center gap-2 text-sm text-zinc-400">
-            <MapPin className="size-3.5" />
-            Oaxaca, MX
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="relative flex size-2.5">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-rutaal-green opacity-75" />
-            <span className="relative inline-flex size-2.5 rounded-full bg-rutaal-green" />
-          </span>
-          <span className="text-xs font-medium text-rutaal-green">Online</span>
-        </div>
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={() => setEmergencyOpen(true)}
-          className="gap-2 bg-rutaal-red hover:bg-rutaal-red/90 font-semibold"
+    <header className="border-b border-rutaal-navy/10 bg-white">
+      {/* Top row: logo (back) + title */}
+      <div className="relative flex items-center justify-between px-6 py-3">
+        <Link
+          href="/"
+          className="flex items-center transition-opacity hover:opacity-80"
+          title="Back to landing page"
         >
-          <ShieldAlert className="size-4" />
-          Emergency
+          <Image
+            src="/RUTA_AL_Logo.png"
+            alt="Ruta'al - Back to landing page"
+            width={180}
+            height={65}
+            className="h-12 w-auto sm:h-14"
+          />
+        </Link>
+        <h2 className="absolute left-1/2 -translate-x-1/2 text-sm font-semibold uppercase tracking-wider text-[#323030]/80">
+          Agent Dashboard
+        </h2>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setInventoryOffsetOpen(true)}
+          className="h-8 gap-1.5 border-rutaal-navy/20 bg-white px-3 text-xs hover:bg-[#f5f3ed] hover:border-rutaal-navy/40"
+        >
+          <Package className="size-3.5" />
+          Inventory Payable Offset
         </Button>
       </div>
 
-      <div className="flex gap-6">
+      {/* Main row: identity + stats */}
+      <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4">
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-base font-semibold text-[#323030]">Juan&apos;s Pharmacy</h1>
+            <div className="flex items-center gap-2 text-xs text-[#323030]/50">
+              <MapPin className="size-3" />
+              Agent Location
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-rutaal-green opacity-60" />
+              <span className="relative size-2 rounded-full bg-rutaal-green" />
+            </span>
+            <span className="text-xs font-medium text-rutaal-green">Online</span>
+          </div>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() => setEmergencyOpen(true)}
+            className="h-7 gap-1.5 px-2.5 text-xs bg-rutaal-red hover:bg-rutaal-red/90"
+          >
+            <ShieldAlert className="size-3.5" />
+            Emergency
+          </Button>
+        </div>
+
+        <div className="flex gap-4">
         <StatCard
           label="Cash Deployed"
           value={wallet.cashDeployed}
@@ -90,16 +115,17 @@ export function WalletHeader() {
           suffix="%"
         />
       </div>
+      </div>
 
       <Dialog open={emergencyOpen} onOpenChange={setEmergencyOpen}>
-        <DialogContent className="border-zinc-800 bg-zinc-950 sm:max-w-sm">
+        <DialogContent className="border-rutaal-navy/20 bg-white sm:max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-rutaal-red">
               <ShieldAlert className="size-5" />
               Emergency
             </DialogTitle>
-            <DialogDescription className="text-zinc-400">
-              Tap a number to call. Use for police or security.
+            <DialogDescription className="text-[#323030]/70">
+              Tap a number to call. Use for police or security. Update numbers for your region.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-2 py-2">
@@ -107,9 +133,9 @@ export function WalletHeader() {
               <a
                 key={tel}
                 href={tel}
-                className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-left transition-colors hover:bg-zinc-800 hover:border-rutaal-red/50"
+                className="flex items-center justify-between rounded-lg border border-rutaal-navy/20 bg-[#f5f3ed] px-4 py-3 text-left transition-colors hover:bg-[#ebe9e3] hover:border-rutaal-red/50"
               >
-                <span className="font-medium text-white">{label}</span>
+                <span className="font-medium text-[#323030]">{label}</span>
                 <span className="font-mono text-lg font-semibold text-rutaal-red">
                   {number}
                 </span>
@@ -118,6 +144,8 @@ export function WalletHeader() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <InventoryPayableOffset open={inventoryOffsetOpen} onOpenChange={setInventoryOffsetOpen} />
     </header>
   );
 }
@@ -151,13 +179,13 @@ function StatCard({
   }, [value]);
 
   return (
-    <div className="min-w-[120px] rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2">
-      <div className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+    <div className="min-w-[90px] rounded-md border border-rutaal-navy/10 bg-[#f5f3ed]/60 px-3 py-1.5">
+      <div className="text-[10px] font-medium uppercase tracking-wider text-[#323030]/50">
         {label}
       </div>
       <div
-        className={`font-mono text-2xl font-semibold tabular-nums transition-all ${
-          isFlashing ? "animate-stat-flash text-rutaal-yellow" : "text-white"
+        className={`font-mono text-lg font-semibold tabular-nums transition-all ${
+          isFlashing ? "animate-stat-flash text-rutaal-yellow" : "text-[#323030]"
         }`}
       >
         {prefix}

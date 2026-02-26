@@ -29,21 +29,22 @@ function getCreditScoreColor(score: number): string {
   return "bg-rutaal-red";
 }
 
+const PLACEHOLDER_TIME = "20:00"; // Stable placeholder to avoid hydration mismatch (Date.now differs server vs client)
+
 export function LoanCard({
   loan,
   isNew,
   isRejecting,
   onRejectStart,
 }: LoanCardProps) {
-  const [timeLeft, setTimeLeft] = useState(() => {
-    return loan.expiresAt.getTime() - Date.now();
-  });
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const reject = useAgentStore((s) => s.reject);
   const expireRequest = useAgentStore((s) => s.expireRequest);
   const expiredRef = useRef(false);
 
   useEffect(() => {
+    setTimeLeft(loan.expiresAt.getTime() - Date.now());
     const interval = setInterval(() => {
       const remaining = loan.expiresAt.getTime() - Date.now();
       setTimeLeft(remaining);
@@ -55,7 +56,7 @@ export function LoanCard({
     return () => clearInterval(interval);
   }, [loan.expiresAt, loan.id, expireRequest]);
 
-  const minutesLeft = Math.floor(timeLeft / 60000);
+  const minutesLeft = timeLeft !== null ? Math.floor(timeLeft / 60000) : 20;
   const isUrgent = minutesLeft < 5;
   const isCritical = minutesLeft < 2;
 
@@ -77,28 +78,28 @@ export function LoanCard({
     <>
       <div
         className={cn(
-          "rounded-lg border bg-zinc-900/80 p-4 transition-all duration-300",
+          "rounded-lg border border-rutaal-navy/10 bg-white p-4 transition-all duration-300",
           isNew && "animate-slide-in-top border-rutaal-green/50",
           isRejecting && "animate-slide-out-right opacity-0",
           isCritical && "animate-red-pulse border-rutaal-red"
         )}
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <div className="font-medium text-white">{loan.borrowerName}</div>
-            <div className="text-sm text-zinc-400">{loan.phone}</div>
-            <div className="mt-2 flex items-center gap-2">
+            <div className="text-base font-semibold text-[#323030]">{loan.borrowerName}</div>
+            <div className="text-sm text-[#323030]/60">{loan.phone}</div>
+            <div className="mt-1.5 flex items-center gap-1.5">
               <Banknote className="size-4 text-rutaal-yellow" />
-              <span className="font-mono text-lg font-semibold text-white">
+              <span className="font-mono text-lg font-semibold text-[#323030]">
                 ${loan.amount}
               </span>
             </div>
             <div className="mt-2">
-              <div className="mb-1 flex justify-between text-xs">
-                <span className="text-zinc-500">Credit Score</span>
-                <span className="font-mono text-zinc-300">{loan.creditScore}</span>
+              <div className="mb-0.5 flex justify-between text-xs">
+                <span className="text-[#323030]/60">Credit Score</span>
+                <span className="font-mono font-medium text-[#323030]/80">{loan.creditScore}</span>
               </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-1 w-full overflow-hidden rounded-full bg-[#f5f3ed]">
                 <div
                   className={cn(
                     "h-full rounded-full transition-all",
@@ -109,21 +110,24 @@ export function LoanCard({
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col items-end gap-1.5">
+            <div className="text-[10px] font-medium text-[#323030]/60 uppercase tracking-wider">
+              Time left
+            </div>
             <div
               className={cn(
-                "font-mono text-xl font-bold tabular-nums",
+                "font-mono text-base font-semibold tabular-nums",
                 isCritical && "text-rutaal-red",
                 isUrgent && !isCritical && "text-rutaal-yellow",
-                !isUrgent && "text-zinc-300"
+                !isUrgent && "text-[#323030]/80"
               )}
             >
-              {formatTime(timeLeft)}
+              {timeLeft === null ? PLACEHOLDER_TIME : formatTime(timeLeft)}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <Button
                 size="sm"
-                className="bg-rutaal-green hover:bg-rutaal-green/90"
+                className="h-7 px-2.5 text-xs bg-rutaal-green hover:bg-rutaal-green/90"
                 onClick={() => setModalOpen(true)}
               >
                 Disburse
@@ -132,7 +136,7 @@ export function LoanCard({
                 size="sm"
                 variant="destructive"
                 onClick={handleReject}
-                className="gap-1"
+                className="h-7 gap-1 px-2.5 text-xs"
               >
                 <X className="size-3.5" />
                 Reject
